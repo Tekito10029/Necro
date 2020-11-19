@@ -1,0 +1,3 @@
+﻿  main.cpp
+C:\Users\student\Documents\Necro\Necro\main.cpp(126,13): warning C4551: 関数呼び出しに引数リストがありません。
+  Necro.vcxproj -> C:\Users\student\Documents\Necro\Debug\Necro.exe
