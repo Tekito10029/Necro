@@ -19,10 +19,10 @@ int main()
     Enemy enemy[enemy_num];
 
     //enemy[0].init(40, 40. 3);
-    //enemy[1].init(40, 40. 3);
-    //enemy[2].init(40, 40. 3);
-    //enemy[3].init(40, 40. 3);
-    //enemy[4].init(40, 40. 3);
+    //enemy[1].init(41, 40. 3);
+    //enemy[2].init(42, 40. 3);
+    //enemy[3].init(43, 40. 3);
+    //enemy[4].init(44, 40. 3);
 
     int field[50][50] =
     {
@@ -94,11 +94,11 @@ int main()
             }
             
             //現在探索しているマスがエネミーのマスだった場合
-            for (int n = 0; n < enemy_num  n++)
+            for (int n = 0; n < enemy_num; n++)
             {
                 if (j == enemy[n].getPositionX() && i == enemy[n].getPositionY())
                 {
-
+                    std::cout << "Ｅ";
                 }
             }
             
@@ -122,8 +122,8 @@ int main()
     //メインループ開始
     while (true)
     {
-        std::cout << "プレイヤーのHP"<<player.getHP();
-        std::cout << "敵のHP"<<enemy.getHP();
+        //std::cout << "プレイヤーのHP"<<player.getHP();
+        //std::cout << "敵のHP"<<enemy.getHP();
         //移動のベクトルの変数
         int vec_x = 0;
         int vec_y = 0;
@@ -164,7 +164,7 @@ int main()
             //プレイヤーの入力に応じたアップデート
             //プレイヤーが敵に隣接していなかった場合、移動
             if (field[player.getPositionY() + vec_y][player.getPositionX() + vec_x] == 0 && 
-                !(player.getPositionX() + vec_x == enemy.getPositionX() && player.getPositionY() + vec_y == enemy.getPositionY()))
+                !(player.getPositionX() + vec_x == enemy[enemy_num].getPositionX() && player.getPositionY() + vec_y == enemy[enemy_num].getPositionY()))
             {
                 //PlayerPosX += vec_x;
                 //PlayerPosY += vec_y;
@@ -172,15 +172,15 @@ int main()
             }
 
             //プレイヤーが敵に隣接していた場合、攻撃
-            else if (player.getPositionX() + vec_x == enemy.getPositionX() && player.getPositionY() + vec_y == enemy.getPositionY())
+            else if (player.getPositionX() + vec_x == enemy[enemy_num].getPositionX() && player.getPositionY() + vec_y == enemy[enemy_num].getPositionY())
             {
-                enemy.Hp_change(-1);
+                enemy[enemy_num].Hp_change(-1);
             }
 
 
             //エネミーの行動
-            int Enemy_vec_x = player.getPositionX() - enemy.getPositionX();
-            int Enemy_vec_y = player.getPositionY() - enemy.getPositionY();
+            int Enemy_vec_x = player.getPositionX() - enemy[enemy_num].getPositionX();
+            int Enemy_vec_y = player.getPositionY() - enemy[enemy_num].getPositionY();
 
 
             //プレイヤーとエネミーの座標の差からベクトルを作成
@@ -214,16 +214,16 @@ int main()
 
 
             //プレイヤーに隣接していなかった場合、プレイヤーに向かって前後左右に移動
-            if (field[enemy.getPositionY() + Enemy_vec_y][enemy.getPositionX() + Enemy_vec_x] == 0 &&
-                !(enemy.getPositionX() + Enemy_vec_x == player.getPositionX() && enemy.getPositionY() + Enemy_vec_y == player.getPositionY()))
+            if (field[enemy[enemy_num].getPositionY() + Enemy_vec_y][enemy[enemy_num].getPositionX() + Enemy_vec_x] == 0 &&
+                !(enemy[enemy_num].getPositionX() + Enemy_vec_x == player.getPositionX() && enemy[enemy_num].getPositionY() + Enemy_vec_y == player.getPositionY()))
             {
-                enemy.Move(Enemy_vec_x, Enemy_vec_y);
+                enemy[enemy_num].Move(Enemy_vec_x, Enemy_vec_y);
                 //enemy.Move(Enemy_vec_x, Enemy_vec_y);
             }
 
 
             //プレイヤーに隣接していた場合、攻撃
-            else if (enemy.getPositionX() + Enemy_vec_x == player.getPositionX() && enemy.getPositionY() + Enemy_vec_y == player.getPositionY())
+            else if (enemy[enemy_num].getPositionX() + Enemy_vec_x == player.getPositionX() && enemy[enemy_num].getPositionY() + Enemy_vec_y == player.getPositionY())
             {
                 player.Hp_change(-1);
             }
@@ -244,7 +244,7 @@ int main()
                 }
 
                 //現在探索しているマスがエネミーのマスだった場合
-                else if (i == enemy.getPositionY() && j == enemy.getPositionX())
+                else if (i == enemy[enemy_num].getPositionY() && j == enemy[enemy_num].getPositionX())
                 {
                     std::cout << "Ｅ";
                 }
@@ -271,14 +271,14 @@ int main()
            // break;
        // }
 
-        if (enemy.getHP() == 0)
+        /*if (enemy.getHP() == 0)
         {
             if (enemy2.getHP() == 0)
             {
                 std::cout << "敵を倒した、ダンジョンクリア";
                 break;
             }
-        }
+        }*/
 
     }
 
