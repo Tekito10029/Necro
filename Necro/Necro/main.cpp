@@ -244,14 +244,17 @@ int main()
                 }
 
                 //現在探索しているマスがエネミーのマスだった場合
-                else if (i == enemy[enemy_num].getPositionY() && j == enemy[enemy_num].getPositionX())
+                for (int n = 0; n < enemy_num; n++)
                 {
-                    std::cout << "Ｅ";
+                    if (j == enemy[n].getPositionX() && i == enemy[n].getPositionY())
+                    {
+                        std::cout << "Ｅ";
+                    }
                 }
    
 
                 //現在探索しているマスのフィールド情報が0だった場合は'□'を表示
-                else if (field[j][i] == 0)
+                if (field[j][i] == 0)
                 {
                     std::cout << "□";
                 }
