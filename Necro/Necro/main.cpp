@@ -1,29 +1,31 @@
-﻿#include <Windows.h>
-#include <iostream>
-#include <stdio.h>
-#include <conio.h>
-//自分で作成したヘッダーファイルは""で囲う
-#include "Player.h"
-#include "Enemy.h"
+﻿// necro.cpp : このファイルには 'main' 関数が含まれています。プログラム実行の開始と終了がそこで行われます。
+//作成：得居勇太
+
+/*
+    ctrl + shift + B    ビルド
+    F5                  デバッグ実行
+*/
+
+#include<Windows.h>
+#include<iostream>
+#include<stdio.h>
+#include<conio.h>
+
+#include"Player.h"
+#include"Enemy.h"
 
 int main()
 {
     //変数宣言
+    //変数の初期化
 
-    Player player(10,10);
+    Player player(1, 1);
 
-    //Enemy enemy(40,40);
 
-    //Enemy2 enemy2(40,41);
-    const int enemy_num = 5;
-    Enemy enemy[enemy_num];
 
-    //enemy[0].init(40, 40. 3);
-    //enemy[1].init(41, 40. 3);
-    //enemy[2].init(42, 40. 3);
-    //enemy[3].init(43, 40. 3);
-    //enemy[4].init(44, 40. 3);
-
+    //int型の50x50のフィールド2次元配列
+    //0が空き地
+    //1が壁
     int field[50][50] =
     {
         {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
@@ -33,27 +35,27 @@ int main()
         {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
         {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
         {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
         {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
         {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
         {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
@@ -76,218 +78,293 @@ int main()
         {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
         {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
         {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
-    };         //int型の50＊50のフィールド、二次元配列
-             //0が空き地
-             //1が壁
+    };
 
-    //盤面表示
+    //Enemy enemy;
+    const int enemy_num = 10;   //エネミーの数の定数
+    Enemy _enemy[enemy_num];           //エネミーオブジェクト配列
 
-    //フィールドを見やすく表示
+    //エネミーオブジェクト配列の要素全て初期化
+    for (int i = 0; i < enemy_num; i++)
+    {
+        _enemy[i].Init(i % 48 + 1, 48 - i / 48, 3);
+    }
+
+
+    //Enemy* _enemy[2];
+    //_enemy[0] = new Enemy(10, 10);
+    //_enemy[1] = new Enemy(30,30);
+
+    //2次元配列を探索するので、forを２個使用する
+
+    //for1個目
     for (int i = 0; i < 50; i++)
     {
+        //for2個目
         for (int j = 0; j < 50; j++)
         {
-            //現在探索しているマスがプレイヤーのマスだった場合
-            if (i == player.getPositionX() && j == player.getPositionY())
+            bool flag = false;//描画のフラグ
+           //現在探索しているマスがプレイヤーのいるマスだった場合
+            if (j == player.getPositionX() && i == player.getPositionY())
             {
                 std::cout << "Ｐ";
+                continue;     //現在のマスは描画したので、コンティニューで次のマスへ
             }
-            
-            //現在探索しているマスがエネミーのマスだった場合
+            //現在探索しているマスがエネミーのいるマスだった場合
+             //else if (j == enemy.getPositionX() && i == enemy.getPositionY())
+             //{
+             //    std::cout << "Ｅ";
+             //}
+             //エネミー配列の探索
             for (int n = 0; n < enemy_num; n++)
             {
-                if (j == enemy[n].getPositionX() && i == enemy[n].getPositionY())
+                if (j == _enemy[n].getPositionX() && i == _enemy[n].getPositionY())//エネミーのいるマスだった場合
                 {
                     std::cout << "Ｅ";
+                    flag = true;   //描画フラグをTrueへ
+                    break;
                 }
             }
-            
-
-            //現在探索しているマスのフィールド情報が0だった場合は'□'を表示
-            if (field[j][i] == 0)
+            if (flag)continue;     //描画がすでにされている場合は、次のマスへ
+           //現在探索しているマスのフィールド情報が0だった場合
+            else if (field[i][j] == 0)
             {
                 std::cout << "□";
             }
-            //現在探索しているマスのフィールド情報が1だった場合は'■'を表示
-            else if (field[j][i] == 1)
+            //現在探索しているマスのフィールド情報が1だった場合
+            else if (field[i][j] == 1)
             {
                 std::cout << "■";
             }
-
+            //for2個目閉じ
         }
+        //改行
         std::cout << "\n";
+        //for1個目閉じ
     }
-
 
     //メインループ開始
     while (true)
     {
-        //std::cout << "プレイヤーのHP"<<player.getHP();
-        //std::cout << "敵のHP"<<enemy.getHP();
-        //移動のベクトルの変数
-        int vec_x = 0;
-        int vec_y = 0;
-        bool throgh = false;
-
-        //プレイヤーの入力受付
-        if (_kbhit)
-        {   
-            switch (_getch())
-            {
-                //プレイヤーの入力に応じたアップデート
-            case 72: //上
-                vec_x = 0;
-                vec_y = -1;
-                break;
-
-            case 77: //右
-                vec_x = 1;
-                vec_y = 0;
-                break;
-
-            case 80: //下
-                vec_x = 0;
-                vec_y = 1;
-                break;
-
-            case 75: //左
-                vec_x = -1;
-                vec_y = 0;
-                break;
-            case 224:
-                throgh = true;
-                break;
-            }
-
-            if (throgh)continue; //2バイト必要なキーが押された場合、スルーする
-
-            //プレイヤーの入力に応じたアップデート
-            //プレイヤーが敵に隣接していなかった場合、移動
-            if (field[player.getPositionY() + vec_y][player.getPositionX() + vec_x] == 0 && 
-                !(player.getPositionX() + vec_x == enemy[enemy_num].getPositionX() && player.getPositionY() + vec_y == enemy[enemy_num].getPositionY()))
-            {
-                //PlayerPosX += vec_x;
-                //PlayerPosY += vec_y;
-                player.Move(vec_x, vec_y);
-            }
-
-            //プレイヤーが敵に隣接していた場合、攻撃
-            else if (player.getPositionX() + vec_x == enemy[enemy_num].getPositionX() && player.getPositionY() + vec_y == enemy[enemy_num].getPositionY())
-            {
-                enemy[enemy_num].Hp_change(-1);
-            }
-
-
-            //エネミーの行動
-            int Enemy_vec_x = player.getPositionX() - enemy[enemy_num].getPositionX();
-            int Enemy_vec_y = player.getPositionY() - enemy[enemy_num].getPositionY();
-
-
-            //プレイヤーとエネミーの座標の差からベクトルを作成
-            //Xの座標差とYの座標差の絶対値を比較
-            if (abs(Enemy_vec_x) >= abs(Enemy_vec_y)) //X座標差の絶対値がY座標差以上だった場合
-            {
-                Enemy_vec_y = 0;
-
-                if (Enemy_vec_x > 0)
-                {
-                    Enemy_vec_x = 1;
-                }
-                else if (Enemy_vec_x < 0)
-                {
-                    Enemy_vec_x = -1;
-                }
-            }
-            else                                       //Y座標差の絶対値がX座標差以上だった場合
-            {
-                Enemy_vec_x = 0;
-
-                if (Enemy_vec_y > 0)
-                {
-                    Enemy_vec_y = 1;
-                }
-                else if (Enemy_vec_y < 0)
-                {
-                    Enemy_vec_y = -1;
-                }
-            }
-
-
-            //プレイヤーに隣接していなかった場合、プレイヤーに向かって前後左右に移動
-            if (field[enemy[enemy_num].getPositionY() + Enemy_vec_y][enemy[enemy_num].getPositionX() + Enemy_vec_x] == 0 &&
-                !(enemy[enemy_num].getPositionX() + Enemy_vec_x == player.getPositionX() && enemy[enemy_num].getPositionY() + Enemy_vec_y == player.getPositionY()))
-            {
-                enemy[enemy_num].Move(Enemy_vec_x, Enemy_vec_y);
-                //enemy.Move(Enemy_vec_x, Enemy_vec_y);
-            }
-
-
-            //プレイヤーに隣接していた場合、攻撃
-            else if (enemy[enemy_num].getPositionX() + Enemy_vec_x == player.getPositionX() && enemy[enemy_num].getPositionY() + Enemy_vec_y == player.getPositionY())
-            {
-                player.Hp_change(-1);
-            }
-        }
-
-        //盤面クリア
-        std::system("cls");
-
-        //盤面表示
-        for (int i = 0; i < 50; i++)
+        if (player.Main())
         {
-            for (int j = 0; j < 50; j++)
+            bool move_flag = false;    //プレイヤーの移動可能フラグ
+            //プレイヤーの進行方向が0だった場合は、移動可能フラグをtrueへ
+            if (field[player.getPositionY() + player.getVec_y()][player.getPositionX() + player.getVec_x()] == 0)
             {
-                //現在探索しているマスがプレイヤーのマスだった場合
-                if (i == player.getPositionY() && j == player.getPositionX())
+                move_flag = true;
+            }
+
+            //エネミー配列を探索し、進行予定のマスにいるエネミーがいるかどうか検索
+            for (int i = 0; i < enemy_num; i++)
+            {
+                if (player.getPositionY() + player.getVec_y() == _enemy[i].getPositionY() && player.getPositionX() + player.getVec_x() == _enemy[i].getPositionX())
                 {
-                    std::cout << "Ｐ";
+                    //playerX += player_vec_x;
+                    //playerY += player_vec_y;
+                    _enemy[i].Hp_change(-1);
+                    move_flag = false;
+                }
+            }
+
+            //移動可能フラグがtrueだった場合移動
+            if (move_flag)player.Move(player.getVec_x(), player.getVec_y());
+
+
+
+
+
+
+            //エネミー配列の探索
+            for (int n = 0; n < enemy_num; n++)
+            {
+                //エネミーの行動
+                int enemy_vec_x = player.getPositionX() - _enemy[n].getPositionX();
+                int enemy_vec_y = player.getPositionY() - _enemy[n].getPositionY();
+
+                //Xの座標の差とYの座標の差の絶対値を比較し、XがY以上だった場合、ベクトルをX中心に修正する
+                if (abs(enemy_vec_x) >= abs(enemy_vec_y))
+                {
+                    enemy_vec_y = 0;
+                    if (enemy_vec_x > 0)enemy_vec_x = 1;
+                    else if (enemy_vec_x < 0)enemy_vec_x = -1;
+                }
+                else
+                {
+                    enemy_vec_x = 0;
+                    if (enemy_vec_y > 0)enemy_vec_y = 1;
+                    else if (enemy_vec_y < 0)enemy_vec_y = -1;
                 }
 
-                //現在探索しているマスがエネミーのマスだった場合
-                for (int n = 0; n < enemy_num; n++)
+                //エネミー移動可能フラグ
+                bool enemy_move_flag = false;
+
+                //進行方向が0だった場合、フラグをtrueへ
+                if (field[_enemy[n].getPositionY() + enemy_vec_y][_enemy[n].getPositionX() + enemy_vec_x] == 0)
                 {
-                    if (j == enemy[n].getPositionX() && i == enemy[n].getPositionY())
+                    enemy_move_flag = true;
+                }
+
+                //プレイヤーに隣接していなかった場合、プレイヤーに向かって前後左右移動
+                if (_enemy[n].getPositionY() + enemy_vec_y == player.getPositionY() && _enemy[n].getPositionX() + enemy_vec_x == player.getPositionX())
+                {
+                    //enemyX += enemy_vec_x;
+                    //enemyY += enemy_vec_y;
+                    enemy_move_flag = false;
+                    player.Hp_change(-1);
+                }
+                //他のエネミーと重ならないか確認の探索
+                for (int m = 0; m < enemy_num; m++)
+                {
+                    if (_enemy[n].getPositionY() + enemy_vec_y == _enemy[m].getPositionY() && _enemy[n].getPositionX() + enemy_vec_x == _enemy[m].getPositionX())
                     {
-                        std::cout << "Ｅ";
+                        enemy_move_flag = false;
                     }
                 }
-   
-
-                //現在探索しているマスのフィールド情報が0だった場合は'□'を表示
-                if (field[j][i] == 0)
+                //移動可能フラグがtrueだった場合は、移動
+                if (enemy_move_flag)_enemy[n].Move(enemy_vec_x, enemy_vec_y);
+                //盤面クリア
+                std::system("cls");
+                //盤面表示
+                    //for1個目
+       //for1個目
+                for (int i = 0; i < 50; i++)
                 {
-                    std::cout << "□";
+                    //for2個目
+                    for (int j = 0; j < 50; j++)
+                    {
+                        bool flag = false;//描画のフラグ
+                       //現在探索しているマスがプレイヤーのいるマスだった場合
+                        if (j == player.getPositionX() && i == player.getPositionY())
+                        {
+                            std::cout << "Ｐ";
+                            continue;     //現在のマスは描画したので、コンティニューで次のマスへ
+                        }
+                        //現在探索しているマスがエネミーのいるマスだった場合
+                         //else if (j == enemy.getPositionX() && i == enemy.getPositionY())
+                         //{
+                         //    std::cout << "Ｅ";
+                         //}
+                         //エネミー配列の探索
+                        for (int n = 0; n < enemy_num; n++)
+                        {
+                            if (j == _enemy[n].getPositionX() && i == _enemy[n].getPositionY())//エネミーのいるマスだった場合
+                            {
+                                std::cout << "Ｅ";
+                                flag = true;   //描画フラグをTrueへ
+                                break;
+                            }
+                        }
+                        if (flag)continue;     //描画がすでにされている場合は、次のマスへ
+                       //現在探索しているマスのフィールド情報が0だった場合
+                        else if (field[i][j] == 0)
+                        {
+                            std::cout << "□";
+                        }
+                        //現在探索しているマスのフィールド情報が1だった場合
+                        else if (field[i][j] == 1)
+                        {
+                            std::cout << "■";
+                        }
+                        //for2個目閉じ
+                    }
+                    //改行
+                    std::cout << "\n";
+                    //for1個目閉じ
                 }
-                //現在探索しているマスのフィールド情報が1だった場合は'■'を表示
-                else if (field[j][i] == 1)
-                {
-                    std::cout << "■";
-                }
+                //for1個目
+                // for(int i = 0;i < 50;i++)
+                // {
+                //    //for2個目
+                //     for (int j = 0; j < 50; j++)
+                //     {
+                //         bool flag = false;
+                //        //現在探索しているマスがプレイヤーのいるマスだった場合
+                //         if (j == player.getPositionX() && i == player.getPositionY())
+                //         {
+                //             std::cout << "Ｐ";
+                //             continue;
+                //         }
+                //        //現在探索しているマスがエネミーのいるマスだった場合
+                //         //else if (j == enemy.getPositionX() && i == enemy.getPositionY())
+                //         //{
+                //         //    std::cout << "Ｅ";
+                //         //}
+                //         for (int n = 0; n < 40; n++)
+                //         {
+                //             if (j == _enemy[n].getPositionX() && i == _enemy[n].getPositionY())
+                //             {
+                //                 std::cout << "Ｅ";
+                //                 flag = true;
+                //                 break;
+                //             }
+                //         }
+                //         if (flag)continue;
+                //        //現在探索しているマスのフィールド情報が0だった場合
+                //         else if (field[i][j] == 0)
+                //         {
+                //             std::cout << "□";
+                //         }
+                //        //現在探索しているマスのフィールド情報が1だった場合
+                //         else if (field[i][j] == 1)
+                //         {
+                //             std::cout << "■";
+                //         }
+                //    //for2個目閉じ
+                //    }
+                //    //改行
+                //     std::cout << "\n";
+                ////for1個目閉じ
+                //}
+                         //情報表示
+                std::cout << "プレイヤーのHP:" << player.getHp() << "\n";
+                //std::cout << "エネミーのHP:" << enemy.getHp() << "\n";
 
             }
-            std::cout << "\n";
+
         }
-        
-        //if (player.getHP() == 0)
-        //{
-          //  std::cout << "プレイヤーは死んでしまった";
-           // break;
-       // }
-
-        /*if (enemy.getHP() == 0)
-        {
-            if (enemy2.getHP() == 0)
-            {
-                std::cout << "敵を倒した、ダンジョンクリア";
-                break;
-            }
-        }*/
-
     }
 
-   //メインループ終了
-    return 0;
+
+
+    ////エネミーの行動
+    //int enemy_vec_x = player.getPositionX() - enemy.getPositionX();
+    //int enemy_vec_y = player.getPositionY() - enemy.getPositionY();
+
+    ////Xの座標の差とYの座標の差の絶対値を比較し、XがY以上だった場合、ベクトルをX中心に修正する
+    //if (abs(enemy_vec_x) >= abs(enemy_vec_y))
+    //{
+    //    enemy_vec_y = 0;
+    //    if (enemy_vec_x > 0)enemy_vec_x = 1;
+    //    else if (enemy_vec_x < 0)enemy_vec_x = -1;
+    //}
+    //else
+    //{
+    //    enemy_vec_x = 0;
+    //    if (enemy_vec_y > 0)enemy_vec_y = 1;
+    //    else if (enemy_vec_y < 0)enemy_vec_y = -1;
+    //}
+    ////プレイヤーに隣接していなかった場合、プレイヤーに向かって前後左右移動
+    //if (field[enemy.getPositionY() + enemy_vec_y][enemy.getPositionX() + enemy_vec_x] == 0 &&
+    //    !(enemy.getPositionY() + enemy_vec_y == player.getPositionY() && enemy.getPositionX() + enemy_vec_x == player.getPositionX()))
+    //{
+    //    //enemyX += enemy_vec_x;
+    //    //enemyY += enemy_vec_y;
+    //    enemy.Move(enemy_vec_x, enemy_vec_y);
+    //}
+
+    ////プレイヤーに隣接していた場合、攻撃
+    //else if (enemy.getPositionY() + enemy_vec_y == player.getPositionY() && enemy.getPositionX() + enemy_vec_x == player.getPositionX())
+    //{
+    //    //playerHP -= 1;
+    //    player.Hp_change(-1);
+    //}
+
+
+
 }
+//メインループ終了
+
 
 // プログラムの実行: Ctrl + F5 または [デバッグ] > [デバッグなしで開始] メニュー
 // プログラムのデバッグ: F5 または [デバッグ] > [デバッグの開始] メニュー
